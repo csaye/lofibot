@@ -1,4 +1,6 @@
-// import { scales } from '../../util/Scales';
+import { getScale } from '../../util/Scales';
+import { getChords } from '../../util/Chords';
+
 import * as Tone from 'tone';
 
 // synths
@@ -8,18 +10,9 @@ const synthC = new Tone.PolySynth(Tone.Synth).toDestination();
 const synthD = new Tone.PolySynth(Tone.Synth).toDestination();
 
 // scale
-const scale = 0;
+const scale = getScale();
 
 // chords
-const getChords = (scale) => {
-  return [
-    ['C4', 'E4', 'G4'],
-    ['G4', 'B4', 'D4'],
-    ['A4', 'C4', 'E4'],
-    ['F4', 'A4', 'C4'],
-  ];
-}
-
 const chords = getChords(scale);
 
 // loops
