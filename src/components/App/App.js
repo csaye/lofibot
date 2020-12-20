@@ -1,8 +1,10 @@
+// imports
 import React, { useState } from 'react';
 import './App.css';
 import * as Tone from 'tone';
 import Project from '../Project/Project'
 
+// app
 function App() {
 
   let [ready, setReady] = useState(false);
@@ -19,4 +21,5 @@ function App() {
   );
 }
 
+// exports
 export default App;

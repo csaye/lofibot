@@ -1,15 +1,28 @@
+// imports
+import { random } from './Operation';
+
+// default octave
+const minOctave = 3; const maxOctave = 4;
+
+const getOctave = () => {
+  const octave = random(minOctave, maxOctave);
+  console.log(`Chose octave ${octave}`);
+  return octave;
+}
+const defaultOctave = getOctave();
+
+// progressions
 const progressions = [
   [1, 5, 6, 4],
   [2, 5, 1, 4],
   [3, 6, 2, 5],
   [4, 5, 1, 6],
   [5, 1, 4, 2],
-  [6, 2, 5, 4],
-  [7, 3, 4, 5]
+  [6, 2, 5, 4]
 ];
 
 const getProgression = () => {
-  const progressionIndex = Math.floor(Math.random() * progressions.length);
+  const progressionIndex = random(0, progressions.length - 1);
   const progression = progressions[progressionIndex];
   console.log(`Chose progression ${progression}`);
   return progression;
@@ -23,8 +36,12 @@ const getProgression = () => {
 // getNote(8, cScale) -> C
 const getNote = (index, scale) => {
   let scaleIndex = index - 1;
-  while (scaleIndex >= scale.length) scaleIndex -= scale.length;
-  return scale[scaleIndex];
+  let octave = defaultOctave;
+  while (scaleIndex >= scale.length) {
+    scaleIndex -= scale.length;
+    octave++;
+  }
+  return scale[scaleIndex] + octave;
 }
 
 // returns chord at index in given scale
@@ -43,6 +60,6 @@ export const getChords = (scale) => {
   const progression = getProgression();
   let chords = [[], [], [], []];
   for (let i = 0; i < 4; i++) chords[i] = getChord(progression[i], scale);
-  console.log(`Chose chords ${chords.join(' - ')}`);
+  console.log(`Chose chords ${chords.join(' | ')}`);
   return chords;
 }

@@ -1,3 +1,7 @@
+// imports
+import { random } from './Operation';
+
+// scales
 const scales = [
   ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
   ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'],
@@ -9,7 +13,7 @@ const scales = [
 ];
 
 export const getScale = () => {
-  const scaleIndex = Math.floor(Math.random() * scales.length);
+  const scaleIndex = random(0, scales.length - 1);
   const scale = scales[scaleIndex];
   console.log(`Chose scale ${scale[0]}`);
   return scale;
