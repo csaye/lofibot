@@ -7,16 +7,19 @@ import { pianoNotes } from '../../util/Piano';
 import hat from '../../audio/drums/hat.wav';
 import kick from '../../audio/drums/kick.wav';
 
+import aiPic from '../../img/ai.svg';
+import robotPic from '../../img/robot.svg';
+
 import * as Tone from 'tone';
 
 // drums
 const drumA = new Tone.Sampler({
   urls: {"C4": hat},
-  volume: -8
+  volume: -10
 }).toDestination();
 const drumB = new Tone.Sampler({
   urls: {"C4": kick},
-  volume: 2
+  volume: -10
 }).toDestination()
 
 // drum loops
@@ -41,16 +44,16 @@ const chords = getChords(scale);
 
 // piano loops
 const pianoLoopA = new Tone.Loop(time => {
-	pianoA.triggerAttackRelease(chords[0], "2n", time);
+	pianoA.triggerAttackRelease(chords[0], "1m", time);
 }, "1m").start(0);
 const pianoLoopB = new Tone.Loop(time => {
-	pianoB.triggerAttackRelease(chords[1], "2n", time);
+	pianoB.triggerAttackRelease(chords[1], "1m", time);
 }, "1m").start("0.5m");
 const pianoLoopC = new Tone.Loop(time => {
-	pianoC.triggerAttackRelease(chords[2], "2n", time);
+	pianoC.triggerAttackRelease(chords[2], "1m", time);
 }, "1m").start("1.0m");
 const pianoLoopD = new Tone.Loop(time => {
-	pianoD.triggerAttackRelease(chords[3], "2n", time);
+	pianoD.triggerAttackRelease(chords[3], "1m", time);
 }, "1m").start("1.5m");
 
 // bpm
@@ -62,6 +65,10 @@ const getBpm = () => {
   return bpm;
 }
 Tone.Transport.bpm.value = getBpm();
+
+Tone.loaded().then(() => {
+  console.log('loaded');
+});
 
 // project
 function Project() {
@@ -78,6 +85,8 @@ function Project() {
     <>
       <button onClick={toneStart}>Start</button>
       <button onClick={toneStop}>Stop</button>
+      <img src={aiPic} alt="" />
+      <img src={robotPic} alt="" />
     </>
   );
 }
