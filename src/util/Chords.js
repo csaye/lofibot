@@ -2,7 +2,7 @@
 import { random } from './Operation';
 
 // default octave
-const minOctave = 3; const maxOctave = 4;
+const minOctave = 1; const maxOctave = 3;
 
 const getOctave = () => {
   const octave = random(minOctave, maxOctave);

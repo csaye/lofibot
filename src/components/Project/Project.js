@@ -3,6 +3,7 @@ import { getScale } from '../../util/Scales';
 import { getChords } from '../../util/Chords';
 import { random } from '../../util/Operation';
 
+import { pianoNotes } from '../../util/Piano';
 import hat from '../../audio/drums/hat.wav';
 import kick from '../../audio/drums/kick.wav';
 
@@ -26,27 +27,11 @@ const drumLoopB = new Tone.Loop(time => {
 	drumB.triggerAttackRelease('C4', "8n", time);
 }, "2n").start("4n");
 
-// synths
-const sounds = [
-  Tone.Synth,
-  Tone.PluckSynth,
-  Tone.MembraneSynth,
-  Tone.FMSynth,
-  Tone.MonoSynth
-];
-
-const getSound = () => {
-  const soundIndex = random(0, sounds.length - 1);
-  console.log(`Chose sound ${soundIndex}`);
-  const sound = sounds[soundIndex];
-  return sound;
-}
-const synthSound = getSound();
-
-const synthA = new Tone.PolySynth(synthSound).toDestination();
-const synthB = new Tone.PolySynth(synthSound).toDestination();
-const synthC = new Tone.PolySynth(synthSound).toDestination();
-const synthD = new Tone.PolySynth(synthSound).toDestination();
+// pianos
+const pianoA = new Tone.Sampler(pianoNotes).toDestination();
+const pianoB = new Tone.Sampler(pianoNotes).toDestination();
+const pianoC = new Tone.Sampler(pianoNotes).toDestination();
+const pianoD = new Tone.Sampler(pianoNotes).toDestination();
 
 // scale
 const scale = getScale();
@@ -54,18 +39,18 @@ const scale = getScale();
 // chords
 const chords = getChords(scale);
 
-// synth loops
-const synthLoopA = new Tone.Loop(time => {
-	synthA.triggerAttackRelease(chords[0], "8n", time);
+// piano loops
+const pianoLoopA = new Tone.Loop(time => {
+	pianoA.triggerAttackRelease(chords[0], "2n", time);
 }, "1m").start(0);
-const synthLoopB = new Tone.Loop(time => {
-	synthB.triggerAttackRelease(chords[1], "8n", time);
+const pianoLoopB = new Tone.Loop(time => {
+	pianoB.triggerAttackRelease(chords[1], "2n", time);
 }, "1m").start("0.5m");
-const synthLoopC = new Tone.Loop(time => {
-	synthC.triggerAttackRelease(chords[2], "8n", time);
+const pianoLoopC = new Tone.Loop(time => {
+	pianoC.triggerAttackRelease(chords[2], "2n", time);
 }, "1m").start("1.0m");
-const synthLoopD = new Tone.Loop(time => {
-	synthD.triggerAttackRelease(chords[3], "8n", time);
+const pianoLoopD = new Tone.Loop(time => {
+	pianoD.triggerAttackRelease(chords[3], "2n", time);
 }, "1m").start("1.5m");
 
 // bpm
